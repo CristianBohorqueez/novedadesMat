@@ -56,8 +56,7 @@ class Row {
     return dateRadicado;
   }
   fechaInicioOld() {
-    let dateOld = new Date (this._row[4])
-    return dateOld;
+    return this._row[4];
   }
   fechaFin() {  
     let dateRadicado = new Date (this._row[5].toLocaleDateString("en-US"))
@@ -65,8 +64,7 @@ class Row {
     return dateRadicado;
   }
   fechaFinOld() {
-    let dateOld = new Date (this._row[5])
-    return dateOld;
+    return this._row[5];
   }
   dias() {  
     return this._row[6];
