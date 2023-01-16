@@ -116,7 +116,7 @@ const printRangeData = (excel) => {
     for (finalDate; firstDate <= finalDate; firstDate.setDate(firstDate.getDate() + 1)) {
         rangeData.push(new Date(firstDate).toLocaleDateString("es-MX"));
         let tr = document.createElement('tr');
-        tr.innerHTML = `<td>${new Date(row.radicado()).toLocaleDateString("es-MX")}</td>
+        tr.innerHTML = `<td>${row.radicado()}</td>
                         <td>${row.identificacion()}</td>
                         <td>${row.nombre()}</td>
                         <td>${row.motivo()}</td>
