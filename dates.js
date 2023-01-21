@@ -38,7 +38,7 @@ class Row {
   }
   radicado() {
     let dateRadicado = new Date (this._row[0].toLocaleDateString("en-US"))
-    dateRadicado =  (dateRadicado.getMonth() + 1) + '/' + (dateRadicado.getDate() + 1)  + '/' + dateRadicado.getFullYear();
+    dateRadicado =  (dateRadicado.getDate() + 1) + '/' + (dateRadicado.getMonth() + 1)  + '/' + dateRadicado.getFullYear();
     return dateRadicado;
   }
   identificacion() {
@@ -132,12 +132,28 @@ const printRangeData = (excel) => {
 }
 
 const htmlTableToExcel = async (type) => {
-  var data = document.getElementById('table_content');
-  var excelFile = await XLSX.utils.table_to_book(data, {sheet: "sheet1"});
-  console.log(excelFile, 'excelFile');
-  XLSX.write(excelFile, { bookType: type, bookSST: true, type: 'base64' });
-  XLSX.writeFile(excelFile, 'novedades_Mat.' + type);
+  const fileName = 'novedades_Mat.' + type;
+  const table = document.getElementById('table_content');
+  const wb = XLSX.utils.table_to_book(table);
+  XLSX.writeFile(wb, fileName);
  }
+
+function exportCSVExcel() {
+  var tableElement = document.getElementById('table_content');
+  var sourceData = 'data:text/csv;charset=utf-8,';
+  var i = 0;
+  while ((row = tableElement.rows[i])) {
+    sourceData +=
+      [
+        row.cells[0],
+        row.cells[1],
+        row.cells[2],
+        row.cells[3],
+      ].join(',') + '\r\n';
+    i++;
+  }
+  window.location.href = encodeURI(sourceData);
+}
 
 const input = document.getElementById('file-selector')
   input.addEventListener('change',async function() {
